@@ -13,8 +13,11 @@ public class ReferenceAutoConfiguration implements EnvironmentAware {
         String address=environment.getProperty("serviceAddress");
         int port=Integer.parseInt(environment.getProperty("servicePort"));
         ProtocolClientProperties rc=new ProtocolClientProperties();
-        rc.setServiceAddress(address);
-        rc.setServicePort(port);
+
+        //有注册中心，client无需知道provider service的地址
+        //rc.setServiceAddress(address);
+        //rc.setServicePort(port);
+
         rc.setRegistryType(Byte.parseByte(environment.getProperty("registryType")));
         rc.setRegistryAddress(environment.getProperty("registryAddress"));
         return new SpringReferencePostProcessor(rc);

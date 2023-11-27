@@ -43,7 +43,7 @@ public class ZookeeperRegistryService implements IRegistryService {
 
     @Override
     public void register(ServiceInfo serviceInfo) throws Exception {
-        log.info("开始注册服务，{}",serviceInfo);
+        log.info("开始注册的服务接口为，{}",serviceInfo);
         ServiceInstance<ServiceInfo> serviceInstance=ServiceInstance
                 .<ServiceInfo>builder().name(serviceInfo.getServiceName())
                 .address(serviceInfo.getServiceAddress())

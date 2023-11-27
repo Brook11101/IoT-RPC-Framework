@@ -72,11 +72,11 @@ public class SpringReferencePostProcessor implements ApplicationContextAware, Be
         //说明这个bean存在这个注解
         if(remoteCallReference!=null) {
             BeanDefinitionBuilder builder=BeanDefinitionBuilder.genericBeanDefinition(SpringReferenceBean.class);
-            log.info("Spring 测试：BeanDefinitionBuilder builder=BeanDefinitionBuilder.genericBeanDefinition(SpringRpcReferenceBean.class) {}",SpringReferenceBean.class);
+            //找到注解后会调用init方法。这里的INIT_METHOD_NAME参数表示为调用init函数
             builder.setInitMethodName(MessageConstant.INIT_METHOD_NAME);
-            log.info("Spring 测试：setInitMethodName(RpcConstant.INIT_METHOD_NAME) {}",MessageConstant.INIT_METHOD_NAME);
             builder.addPropertyValue("interfaceClass",field.getType());
-            log.info("Spring 测试：addPropertyValue(\"interfaceClass\",field.getType()); {}",field.getType());
+            //这里对应去拿的也是按照interface接口去拿的。
+            log.info("Spring 测试：interfaceClass为 {}",field.getType());
             builder.addPropertyValue("registryType",clientProperties.getRegistryType());
             builder.addPropertyValue("registryAddress",clientProperties.getRegistryAddress());
             BeanDefinition beanDefinition=builder.getBeanDefinition();

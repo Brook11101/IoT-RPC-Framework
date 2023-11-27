@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 public class ProtocolClientProperties {
-    private String serviceAddress="192.168.50.116";
-
-    private int servicePort=20880;
+    //前两个属性其实可以删除，因为有注册中心了
+    private String serviceAddress;
+    private int servicePort;
 
     private byte registryType;
 
