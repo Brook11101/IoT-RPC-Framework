@@ -1,9 +1,12 @@
 package controller;
 
-import iotruleservice.IUserService;
+import iotruleservice.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import spring.annotation.RemoteCallReference;
+
+import java.util.Map;
 
 @RestController
 public class HelloController {
@@ -11,11 +14,14 @@ public class HelloController {
     @RemoteCallReference
     private IUserService userService;
 
+    @GetMapping("getUser")
+    public String getUser(@RequestParam(name = "id") String userId) {
+        return userService.getUser(userId);
+    }
 
-
-    @GetMapping("/test")
-    public String test(){
-        return userService.saveUser("Mic");
+    @GetMapping("getUsers")
+    public Map<String, User> getUsers() {
+        return userService.getUsers();
     }
 
 

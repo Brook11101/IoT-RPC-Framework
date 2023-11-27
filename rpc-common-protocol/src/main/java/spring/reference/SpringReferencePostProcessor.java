@@ -50,12 +50,12 @@ public class SpringReferencePostProcessor implements ApplicationContextAware, Be
             BeanDefinition beanDefinition=beanFactory.getBeanDefinition(beanDefinitionname);
             String beanClassName=beanDefinition.getBeanClassName();
             if(beanClassName!=null){
-                //这里使用反射实例化这个类，从而用于parseRpcReference的判断，判断是否存在GpRemoteReference这个注解
+                //这里使用反射实例化这个类，从而用于parseRpcReference的判断，判断是否存在RemoteCallReference这个注解
                 Class<?> clazz= ClassUtils.resolveClassName(beanClassName,this.classLoader);
                 ReflectionUtils.doWithFields(clazz,this::parseRpcReference);
             }
         }
-        //将@GpRemoteReference注解的bean，构建一个动态代理对象
+        //将RemoteCallReference注解的bean，构建一个动态代理对象
         BeanDefinitionRegistry registry=(BeanDefinitionRegistry)beanFactory;
         this.rpcRefBeanDefinitions.forEach((beanName,beanDefinition)->{
             if(context.containsBean(beanName)){
@@ -67,7 +67,7 @@ public class SpringReferencePostProcessor implements ApplicationContextAware, Be
         });
     }
     private void parseRpcReference(Field field){
-        //这段话就是判断这个bean class是否有GpRemoteReference注解
+        //这段话就是判断这个bean class是否有RemoteCallReference注解
         RemoteCallReference remoteCallReference= AnnotationUtils.getAnnotation(field,RemoteCallReference.class);
         //说明这个bean存在这个注解
         if(remoteCallReference!=null) {

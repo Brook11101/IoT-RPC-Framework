@@ -4,6 +4,7 @@ import protocol.ProtocolRequest;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -36,6 +37,7 @@ public class Mediator {
         Object bean=beanMethod.getBean();
         Method method=beanMethod.getMethod();
         try {
+            System.out.println(Arrays.toString(rpcRequest.getParams()));
             return method.invoke(bean,rpcRequest.getParams());
         } catch (IllegalAccessException e) {
             e.printStackTrace();

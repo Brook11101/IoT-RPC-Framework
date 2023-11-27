@@ -17,7 +17,7 @@ public class NettyClient {
     private final Bootstrap bootstrap;
     private final EventLoopGroup eventLoopGroup=new NioEventLoopGroup();
     public NettyClient(){
-        log.info("begin init NettyClient");
+        log.info("开始初始化 Netty Client");
         bootstrap=new Bootstrap();
         bootstrap.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
