@@ -50,7 +50,7 @@ public class SpringReferencePostProcessor implements ApplicationContextAware, Be
             BeanDefinition beanDefinition=beanFactory.getBeanDefinition(beanDefinitionname);
             String beanClassName=beanDefinition.getBeanClassName();
             if(beanClassName!=null){
-                //这里使用反射实例化这个类，从而用于parseRpcReference的判断，判断是否存在RemoteCallReference这个注解
+                //利用类加载机制和类加载器获取相关的信息，即堆内存上的java.lang.class对象信息
                 Class<?> clazz= ClassUtils.resolveClassName(beanClassName,this.classLoader);
                 ReflectionUtils.doWithFields(clazz,this::parseRpcReference);
             }
